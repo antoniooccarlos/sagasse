@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cursos de TI – Sagasse</title>
+  <link rel="icon" type="image/png" href="/imgs/iconssagassemini.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="pg-cursos">
+
+  <!-- BOTÃO DO MENU (círculo superior esquerdo) — mesma função da home -->
+  <button class="anim icon-btn menu-toggle" id="menuToggle" type="button"
+          aria-label="Abrir menu" aria-expanded="false" aria-controls="sidebar">
+    <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
+
+  <!-- BOTÃO DE PERFIL (canto superior direito): ao passar o mouse mostra os dados do usuário (EXEMPLO) -->
+  <div class="perfil">
+    <a class="anim icon-btn" href="#" aria-label="Perfil do usuário">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></svg>
+    </a>
+    <div class="perfil-card" role="tooltip">
+      <strong>Usuário</strong>
+      <p>Nível de experiência <span>Iniciante</span></p>
+      <p>Tempo de cursos <span>12 horas</span></p>
+    </div>
+  </div>
+
+  <!-- MENU LATERAL (igual ao da home) -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="sidebar" id="sidebar" aria-label="Menu principal" inert>
+    <nav>
+      <ul>
+        <li style="--i:0"><a class="anim menu-link" href="/index.html">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></span>
+          Início</a></li>
+        <li style="--i:1"><a class="anim menu-link" href="/pagesHome/historias.html">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5.5C4.5 4 8 4 12 6c4-2 7.5-2 10-.5V19c-2.5-1.5-6-1.5-10 .5-4-2-7.5-2-10-.5z"/><path d="M12 6v13.5"/></svg></span>
+          Histórias delas</a></li>
+        <li style="--i:2"><a class="anim menu-link" href="/pagesHome/chat.html">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.8 7L4 20.5 5.5 16A8 8 0 1 1 21 12z"/></svg></span>
+          Chat</a></li>
+        <li style="--i:3"><a class="anim menu-link" href="/pagesHome/cursos.html">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-4.5"/><path d="M22 9v6"/></svg></span>
+          Cursos</a></li>
+        <li style="--i:4"><a class="anim menu-link" href="/pagesHome/quiz.html">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7"/><path d="M12 17h.01"/></svg></span>
+          Quiz</a></li>
+      </ul>
+    </nav>
+    <a class="anim config-link" href="#">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+      Configurações
+    </a>
+  </aside>
+
+  <!-- TOPO: logo (leva à home) e busca -->
+  <header class="cursos-topo">
+    <div class="pilula-logo">
+      <a class="anim logo-mini" href="/index.html" aria-label="Sagasse – página inicial"><img src="/imgs/iconssagasselogo.png" alt="Sagasse"></a>
+    </div>
+    <div class="busca-topo">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      <input id="buscaCurso" type="search" placeholder="Buscar curso..." aria-label="Buscar curso">
+    </div>
+  </header>
+
+  <main class="cursos-main">
+    <h1 class="sr-only">Cursos de TI</h1>
+
+    <!-- LISTA DE CURSOS — style.css › [C3] -->
+    <section>
+      <div class="cursos-grid" id="cursosGrid">
+      <!-- ===== CURSO 1 — copie este bloco para adicionar outro curso =====
+           data-area / data-nivel / data-horas alimentam o filtro: mantenha iguais ao texto exibido -->
+      <article class="curso" data-nome="Nome do curso 1" data-area="Programação" data-nivel="Iniciante" data-horas="20">
+        
+        <!-- FOTO DO CURSO: troque o texto por <img src="..." alt="..."> -->
+        <div class="curso-foto">Foto do curso</div>
+        <!-- NOME DO CURSO -->
+        <h2>Nome do curso 1</h2>
+        <p class="area">Programação</p>
+        <!-- LINK DO CURSO: troque o href="#" pelo endereço do curso -->
+        <a class="anim curso-link" href="#">Acessar curso</a>
+        <div class="curso-rodape">
+          <!-- HORAS PARA CONCLUSÃO -->
+          <span class="horas">20 horas</span>
+          <!-- NÍVEL (canto inferior direito) -->
+          <span class="nivel">Iniciante</span>
+        </div>
+      </article>
+
+      <!-- ===== CURSO 2 — copie este bloco para adicionar outro curso =====
+           data-area / data-nivel / data-horas alimentam o filtro: mantenha iguais ao texto exibido -->
+      <article class="curso" data-nome="Python para Iniciantes" data-area="Programação" data-nivel="Iniciante" data-horas="40">
+        <span class="diploma" tabindex="0" aria-label="Certificado Disponível"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M7 8h10M7 11h6"/><circle cx="17" cy="16" r="3"/><path d="M15.7 18.6 15 22l2-1.2L19 22l-.7-3.4"/></svg><span class="dica" role="tooltip">Certificado Disponível</span></span>
+        <!-- DIPLOMA: só nos cursos com certificado; apague esta linha nos demais -->
+        <!-- FOTO DO CURSO: troque o texto por <img src="..." alt="..."> -->
+        <div class="curso-foto" style="--foto-bg:#d7f8f9"><img src="/imgs/Python3–Mundo1.png" alt="Foto do curso Python para Iniciantes"></div>
+        <!-- NOME DO CURSO -->
+        <h2>Python para Iniciantes</h2>
+        <p class="area">Programação</p>
+        <!-- LINK DO CURSO: troque o href="#" pelo endereço do curso -->
+        <a class="anim curso-link" href="https://www.cursoemvideo.com/curso/python-3-mundo-1/" target="_blank">Acessar curso</a>
+        <div class="curso-rodape">
+          <!-- HORAS PARA CONCLUSÃO -->
+          <span class="horas">40 horas</span>
+          <!-- NÍVEL (canto inferior direito) -->
+          <span class="nivel">Iniciante</span>
+        </div>
+      </article>
+
+      <!-- ===== CURSO 3 — copie este bloco para adicionar outro curso =====
+           data-area / data-nivel / data-horas alimentam o filtro: mantenha iguais ao texto exibido -->
+      <article class="curso" data-nome="Nome do curso 3" data-area="Redes" data-nivel="Iniciante" data-horas="30">
+        
+        <!-- FOTO DO CURSO: troque o texto por <img src="..." alt="..."> -->
+        <div class="curso-foto">Foto do curso</div>
+        <!-- NOME DO CURSO -->
+        <h2>Nome do curso 3</h2>
+        <p class="area">Redes</p>
+        <!-- LINK DO CURSO: troque o href="#" pelo endereço do curso -->
+        <a class="anim curso-link" href="#">Acessar curso</a>
+        <div class="curso-rodape">
+          <!-- HORAS PARA CONCLUSÃO -->
+          <span class="horas">30 horas</span>
+          <!-- NÍVEL (canto inferior direito) -->
+          <span class="nivel">Iniciante</span>
+        </div>
+      </article>
+
+      <!-- ===== CURSO 4 — copie este bloco para adicionar outro curso =====
+           data-area / data-nivel / data-horas alimentam o filtro: mantenha iguais ao texto exibido -->
+      <article class="curso" data-nome="Nome do curso 4" data-area="Programação" data-nivel="Avançado" data-horas="60">
+        
+        <!-- FOTO DO CURSO: troque o texto por <img src="..." alt="..."> -->
+        <div class="curso-foto">Foto do curso</div>
+        <!-- NOME DO CURSO -->
+        <h2>Nome do curso 4</h2>
+        <p class="area">Programação</p>
+        <!-- LINK DO CURSO: troque o href="#" pelo endereço do curso -->
+        <a class="anim curso-link" href="#">Acessar curso</a>
+        <div class="curso-rodape">
+          <!-- HORAS PARA CONCLUSÃO -->
+          <span class="horas">60 horas</span>
+          <!-- NÍVEL (canto inferior direito) -->
+          <span class="nivel">Avançado</span>
+        </div>
+      </article>
+
+      <!-- ===== CURSO 5 — copie este bloco para adicionar outro curso =====
+           data-area / data-nivel / data-horas alimentam o filtro: mantenha iguais ao texto exibido -->
+      <article class="curso" data-nome="Nome do curso 5" data-area="Dados" data-nivel="Avançado" data-horas="50">
+        
+        <!-- FOTO DO CURSO: troque o texto por <img src="..." alt="..."> -->
+        <div class="curso-foto">Foto do curso</div>
+        <!-- NOME DO CURSO -->
+        <h2>Nome do curso 5</h2>
+        <p class="area">Dados</p>
+        <!-- LINK DO CURSO: troque o href="#" pelo endereço do curso -->
+        <a class="anim curso-link" href="#">Acessar curso</a>
+        <div class="curso-rodape">
+          <!-- HORAS PARA CONCLUSÃO -->
+          <span class="horas">50 horas</span>
+          <!-- NÍVEL (canto inferior direito) -->
+          <span class="nivel">Avançado</span>
+        </div>
+      </article>
+      </div>
+      <p class="vazio-cursos" id="vazioCursos" hidden>Nenhum curso encontrado.</p>
+    </section>
+
+    <!-- FILTRO (coluna da direita) — style.css › [C2] -->
+    <aside class="filtro" aria-label="Filtros">
+      <fieldset>
+        <legend>Curso:</legend>
+          <label><input type="checkbox" name="area" value="Programação"> Programação</label>
+          <label><input type="checkbox" name="area" value="Redes"> Redes</label>
+          <label><input type="checkbox" name="area" value="Dados"> Dados</label>
+      </fieldset>
+      <div style="margin-bottom:20px">
+        <label class="rotulo-f" for="tempo">Tempo:</label>
+        <input type="range" id="tempo" min="10" max="80" step="5" value="80">
+        <span class="tempo-val" id="tempoVal">qualquer duração</span>
+      </div>
+      <fieldset>
+        <legend>Nível:</legend>
+          <label><input type="checkbox" name="nivel" value="Iniciante"> Iniciante</label>
+          <label><input type="checkbox" name="nivel" value="Intermediário"> Intermediário</label>
+          <label><input type="checkbox" name="nivel" value="Avançado"> Avançado</label>
+      </fieldset>
+      <button class="anim limpar" id="limpar" type="button">Limpar filtros</button>
+    </aside>
+  </main>
+
+  <script src="/js/script.js"></script>
+  <script src="/js/cursos.js"></script>
+</body>
+</html>

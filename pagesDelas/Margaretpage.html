@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Margaret Hamilton – Sagasse</title>
+   <link rel="icon" type="image/png" href="/imgs/iconssagassemini.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="pg-dedicada">
+
+  <!-- BARRA LATERAL FIXA — estilos em style.css › [3] BARRA LATERAL FIXA -->
+  <aside class="lateral">
+    <a class="anim logo-lat" href="/index.html" aria-label="Voltar à página inicial"><img src="/imgs/iconssagasselogo.png" alt="Sagasse"></a>
+    <nav aria-label="Seções desta página">
+      <a class="anim" href="#quem-foi">Quem foi</a>
+      <a class="anim" href="#contribuicao">Sua contribuição</a>
+      <a class="anim" href="#curiosidades">Curiosidades</a>
+    </nav>
+    <a class="anim voltar" href="/pagesHome/historias.html">← Histórias delas</a>
+  </aside>
+
+  <main>
+    <!-- SEÇÃO 1: QUEM FOI — style.css › [4] -->
+    <section class="sec quem" id="quem-foi">
+      <figure class="retrato"><img src="/imgs/Margarethomepage.png" alt="Retrato de Margaret Hamilton sentada"></figure>
+      <div>
+        <p class="rotulo">Quem foi</p>
+        <h1 class="titulao">Margaret Hamilton</h1>
+        <p class="areas">Programação - Engenharia de software</p>
+        <p class="texto">Margaret Hamilton nasceu em 1936, nos Estados Unidos, e liderou no laboratório do MIT a equipe que escreveu o software de bordo das missões Apollo. Em uma época em que programar mal era visto como engenharia, defendeu métodos rigorosos e ajudou a dar nome à área: engenharia de software.</p>
+        <blockquote class="citacao">Ajudou a transformar a programação em uma disciplina de engenharia.<cite>Destaque — <!-- TROQUE por uma citação dela, se preferir -->resumo da sua trajetória</cite></blockquote>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: SUA CONTRIBUIÇÃO (para incluir uma imagem, como a máquina do mockup, adicione um <img> aqui) -->
+    <section class="sec" id="contribuicao">
+      <p class="rotulo">Sua contribuição</p>
+      <h2 class="titulao tit-md">O Software da Apollo 11</h2>
+      <p class="texto">Durante a descida da Apollo 11 à Lua, em 1969, o computador de bordo emitiu alarmes de sobrecarga. O sistema criado por sua equipe priorizou as tarefas essenciais e descartou as demais, permitindo que a alunissagem continuasse.</p>
+      <div class="cards3">
+        <article class="cartao">
+          <h3>Engenharia de software</h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>
+          <p>Ajudou a consolidar o termo e defendeu testes e tratamento de erros desde o projeto do sistema.</p>
+        </article>
+        <article class="cartao">
+          <h3>Reconhecimento</h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v6a5 5 0 0 1-10 0z"/><path d="M7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3"/></svg>
+          <p>Tornou-se referência mundial na área e é lembrada como uma das protagonistas da corrida espacial.</p>
+        </article>
+        <article class="cartao">
+          <h3>Legado</h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>
+          <p>Suas ideias de software confiável inspiram práticas usadas em sistemas críticos, da aviação à medicina.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 3: CURIOSIDADES -->
+    <section class="sec curio" id="curiosidades">
+      <figure class="retrato"><img src="/imgs/Margaretcuriosidade.jpg" alt="Retrato de Margaret Hamilton sentada"></figure>
+      <div>
+        <h2 class="titulao tit-md">Curiosidades</h2>
+        <ul>
+        <li>Uma foto famosa a mostra ao lado de uma pilha de listagens do código da Apollo, quase da sua altura.</li>
+        <li>Sua filha pequena, Lauren, derrubou o simulador ao apertar teclas por acidente, o que reforçou a importância de proteger o software contra erros humanos.</li>
+        <li>Em 2016, recebeu a Medalha Presidencial da Liberdade das mãos do presidente Barack Obama.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- BOTÃO VOLTAR AO TOPO (aparece ao rolar; lógica em script.js) -->
+  <button class="anim topo-btn" type="button" aria-label="Voltar ao topo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>

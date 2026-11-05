@@ -1,0 +1,481 @@
+:root{
+  --bg:#301c43; --bg-deep:#1c1528; --mint:#8ed1a8; --ink:#2a1a3d;
+  --menu:#533a6b; --gold:#f6d56a; --sb-w:min(300px,82vw); --btn:52px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100svh; font-family:'Rubik',system-ui,sans-serif; color:#fff;
+  background:radial-gradient(ellipse at 50% 0%,#3f2858 0%,var(--bg) 45%,var(--bg-deep) 100%) fixed;
+  overflow-x:hidden;
+}
+body.menu-open{overflow:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+/* ---------- Animação dos botões: cresce no hover, "puxa e contrai" no clique ---------- */
+.anim{--hover:1.1;--rest:1;transform:scale(var(--rest));transition:transform .3s var(--ease),filter .3s,background .3s;cursor:pointer}
+.anim:hover,.anim:focus-visible{--rest:var(--hover)}
+.anim.is-pulled{animation:puxar .5s cubic-bezier(.65,0,.35,1)}
+@keyframes puxar{
+  0%,100%{transform:scale(var(--rest))}
+  30%{transform:scale(calc(var(--rest)*1.2),calc(var(--rest)*.84))}
+  62%{transform:scale(calc(var(--rest)*.88),calc(var(--rest)*1.1))}
+  82%{transform:scale(calc(var(--rest)*1.04),calc(var(--rest)*.97))}
+}
+
+/* ---------- Botões redondos ---------- */
+.icon-btn{
+  position:fixed;top:22px;z-index:60;width:var(--btn);height:var(--btn);border-radius:50%;
+  background:var(--mint);border:3px solid var(--ink);color:var(--ink);
+  display:grid;place-items:center;
+}
+.icon-btn:hover{background:#a6e0bb}
+.icon-btn svg{width:26px;height:26px;fill:var(--ink);stroke:var(--ink);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.bell{right:24px}
+.bell:hover svg{animation:sino .6s ease}
+@keyframes sino{25%{transform:rotate(16deg)}50%{transform:rotate(-14deg)}75%{transform:rotate(8deg)}}
+
+.menu-toggle{left:24px;transition:left .55s var(--ease),transform .3s var(--ease),background .3s}
+.menu-open .menu-toggle{left:calc(var(--sb-w) - var(--btn) - 22px)}
+.bars{display:flex;flex-direction:column;gap:4px;width:22px}
+.bars i{display:block;height:3px;border-radius:2px;background:var(--ink);transition:transform .4s var(--ease),opacity .25s}
+.menu-open .bars i:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.menu-open .bars i:nth-child(2){opacity:0;transform:scaleX(0)}
+.menu-open .bars i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ---------- Barra lateral ---------- */
+.overlay{position:fixed;inset:0;z-index:40;background:rgba(14,8,24,.6);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .45s}
+.menu-open .overlay{opacity:1;pointer-events:auto}
+.sidebar{
+  position:fixed;top:0;bottom:0;left:0;z-index:50;width:var(--sb-w);
+  display:flex;flex-direction:column;padding:110px 14px 22px;
+  background:linear-gradient(180deg,#5b4177,var(--menu));border-radius:0 26px 26px 0;
+  box-shadow:12px 0 40px rgba(0,0,0,.4);
+  transform:translateX(-104%);visibility:hidden;
+  transition:transform .55s var(--ease),visibility 0s .55s;
+}
+.menu-open .sidebar{transform:none;visibility:visible;transition:transform .55s var(--ease),visibility 0s}
+.sidebar ul{list-style:none;display:grid;gap:14px}
+.sidebar li{opacity:0;transform:translateX(-22px);transition:opacity .3s,transform .5s var(--ease)}
+.menu-open .sidebar li{opacity:1;transform:none;transition-delay:calc(.12s + var(--i)*.07s)}
+.menu-link{--hover:1.06;display:flex;align-items:center;gap:14px;padding:4px;font-size:1.15rem;transform-origin:left center}
+.ico{flex:none;width:48px;height:48px;border-radius:50%;background:var(--mint);border:3px solid var(--ink);display:grid;place-items:center}
+.ico svg{width:24px;height:24px;fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.config-link{
+  --hover:1.04;margin-top:auto;display:flex;align-items:center;gap:12px;padding:14px 16px;
+  border:1.5px solid rgba(255,255,255,.3);border-radius:16px;background:rgba(28,18,44,.45);font-size:1.1rem;
+}
+.config-link svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+.config-link:hover svg,
+.config-link:focus-visible svg{ animation: girar .8s var(--ease); }
+@keyframes girar{ to{ transform: rotate(360deg); } }
+
+/* ---------- Topo ---------- */
+.topo{display:flex;justify-content:center;padding:18px 0 6px}
+.logo{--hover:1.06;display:block;height:clamp(110px,16vw,150px)}
+.logo img{height:100%;width:auto}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;text-align:center;padding:26px clamp(14px,10vw,150px) 0}
+h1{
+  max-width:1020px;margin:0 auto;padding:clamp(14px,2.4vw,28px) clamp(16px,3vw,40px);
+  background:var(--mint);color:var(--ink);border:3px solid #1d1230;border-radius:24px;
+  font-family:'Barlow Condensed','Rubik',sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:clamp(2rem,6.4vw,4.6rem);line-height:1.04;letter-spacing:.005em;
+  text-wrap:balance;box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+.sub{margin-top:18px;font-size:clamp(1rem,2vw,1.3rem);color:#f1eaf8}
+.circuito{position:absolute;top:50%;width:clamp(70px,9.5vw,130px);height:auto;aspect-ratio:130/140;margin-top:-52px;color:var(--mint)}
+.circuito.esq{left:0}
+.circuito.dir{right:0;transform:scaleX(-1)}
+.spark{
+  position:absolute;width:var(--s);height:var(--s);background:var(--gold);
+  clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);
+}
+
+/* ---------- Animação inicial: circuitos se desenham e os brilhos pulsam ---------- */
+#circuito path{animation:tracar 1.6s .3s var(--ease) backwards}
+@keyframes tracar{from{stroke-dasharray:300;stroke-dashoffset:300}to{stroke-dasharray:300;stroke-dashoffset:0}}
+.spark{animation:brilho 2.8s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes brilho{0%,100%{transform:scale(.55) rotate(0);opacity:.55}50%{transform:scale(1.1) rotate(45deg);opacity:1}}
+@media (prefers-reduced-motion:reduce){#circuito path,.spark{animation:none}}
+
+/* ---------- Pioneiras ---------- */
+.pioneiras{
+  max-width:1120px;margin:clamp(24px,5vw,56px) auto 0;padding:0 clamp(12px,3vw,32px) 48px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,2.5vw,32px);
+}
+.card{--hover:1.07;position:relative;display:flex;flex-direction:column;align-items:center;gap:14px;border-radius:24px;padding:8px}
+.card::before{
+  content:"";position:absolute;inset:0;border-radius:24px;z-index:-1;opacity:0;transition:opacity .35s;
+  background:radial-gradient(ellipse at 50% 55%,rgba(142,209,168,.28),transparent 70%);
+}
+.card:hover::before,.card:focus-visible::before{opacity:1}
+.foto{height:clamp(150px,30vw,380px);width:100%;display:flex;align-items:flex-end;justify-content:center}
+.foto img{max-height:100%;width:auto;object-fit:contain}
+.nome{font-size:clamp(.95rem,2.6vw,1.9rem);font-weight:600;text-align:center}
+
+.card{transition: transform .3s var(--ease); }
+.card:hover, .card:focus-visible{ transform: scale(1.07); }
+
+@media (max-width:700px){
+  .circuito,.spark{display:none}
+  .topo{padding-top:14px}
+  .icon-btn{top:16px;--btn:46px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;transition-delay:0s!important}
+}
+
+
+/* =====================================================================
+   PÁGINAS INTERNAS — HISTÓRIAS DELAS + PÁGINAS DEDICADAS
+   ÍNDICE (use Ctrl+F no código abaixo):
+     [1] VARIÁVEIS DAS PÁGINAS INTERNAS  ← cores/fonte/largura da barra
+     [2] PÁGINA "HISTÓRIAS DELAS"  (busca, filtros, cards)
+     [3] BARRA LATERAL FIXA  (páginas dedicadas)
+     [4] SEÇÕES: Quem foi · Sua contribuição · Curiosidades
+     [5] BOTÃO VOLTAR AO TOPO
+     [6] RESPONSIVO
+   As cores vêm das mesmas variáveis da home (--bg, --mint, --gold, --menu...).
+   ===================================================================== */
+
+/* ---------- [1] VARIÁVEIS DAS PÁGINAS INTERNAS ---------- */
+:root{
+  --serif:'Cormorant Garamond',Georgia,serif;  /* fonte dos textos internos */
+  --side-w:220px;                              /* largura da barra fixa */
+  --panel:rgba(83,58,107,.55);                 /* fundo dos cartões (derivado de --menu) */
+  --panel-line:rgba(255,255,255,.14);          /* borda dos cartões */
+  --texto:#f1eaf8;                             /* cor do texto corrido */
+}
+[hidden]{display:none!important}
+
+/* ---------- [2] PÁGINA "HISTÓRIAS DELAS" ---------- */
+.pg-historias{font-family:var(--serif)}
+.pg-historias .sidebar{font-family:'Rubik',system-ui,sans-serif}   /* menu lateral mantém a fonte da home */
+.hist{max-width:1100px;margin:0 auto;padding:10px 20px 64px;text-align:center}
+.pg-historias h1,.pg-dedicada h1{   /* anula o estilo de banner do h1 da home */
+  background:none;border:0;box-shadow:none;border-radius:0;padding:0;max-width:none;margin:0;
+  text-transform:none;text-wrap:initial;color:#fff;font-family:var(--serif);font-weight:600;
+}
+.pg-historias h1{font-size:clamp(2.3rem,6vw,3.8rem);line-height:1.05}
+.hist-sub{margin-top:8px;font-size:1.3rem;color:var(--texto)}   /* EDITE o texto no historias.html */
+
+/* Barra de busca */
+.busca{position:relative;max-width:560px;margin:24px auto 18px}
+.busca svg{position:absolute;left:18px;top:50%;translate:0 -50%;width:22px;height:22px;fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
+.busca input{width:100%;padding:14px 20px 14px 52px;border-radius:999px;border:3px solid var(--mint);background:#fff;color:var(--ink);font:500 1.2rem var(--serif)}
+
+/* Botões de filtro */
+.filtros{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.chip{--hover:1.08;padding:10px 28px;border-radius:999px;border:0;background:var(--panel);color:#fff;font:600 1.2rem var(--serif)}
+.chip.ativo{background:var(--mint);color:var(--ink)}
+
+/* Cards das personagens */
+.hist-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px;margin-top:32px;text-align:left}
+.hist-card{display:block;padding:18px;border-radius:20px;background:var(--panel);border:1px solid var(--panel-line);transition:transform .3s var(--ease),box-shadow .3s}
+.hist-card:hover,.hist-card:focus-visible{transform:translateY(-6px) scale(1.03);box-shadow:0 18px 36px rgba(0,0,0,.35)}
+.hist-foto{height:240px;border-radius:14px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;background:radial-gradient(ellipse at 50% 30%,#6a4d86,#3a2552 75%)}
+.hist-foto img{max-height:100%;width:auto}
+.hist-card h2{margin-top:14px;font-size:1.9rem;font-weight:600}
+.hist-card p{color:var(--gold);font-weight:600;font-size:1.15rem}
+.vazio{margin-top:30px;font-size:1.3rem;color:var(--texto)}
+
+/* ---------- [3] BARRA LATERAL FIXA (páginas dedicadas) ---------- */
+.pg-dedicada{font-family:var(--serif);font-size:1.25rem;color:var(--texto);padding-left:var(--side-w)}
+.lateral{
+  position:fixed;inset:0 auto 0 0;width:var(--side-w);z-index:50;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;padding:22px 12px;
+  background:linear-gradient(180deg,#5b4177,var(--menu));box-shadow:8px 0 30px rgba(0,0,0,.3);
+}
+.lateral::before{   /* anel decorativo dourado */
+  content:"";position:absolute;left:50%;top:150px;width:200px;height:200px;translate:-50% 0;
+  border:2px dashed rgba(246,213,106,.18);border-radius:50%;pointer-events:none;
+}
+.logo-lat{--hover:1.06;display:block;width:128px;position:relative}   /* logo no topo → leva à home */
+.lateral nav{position:relative;display:grid;gap:10px;width:100%;margin-top:44px}
+.lateral nav a{--hover:1.06;padding:12px 10px;text-align:center;font-size:1.4rem;font-weight:600;color:var(--texto);border-radius:12px}
+.lateral nav a.ativo{color:var(--mint);background:rgba(255,255,255,.08)}   /* seção visível no momento */
+.lateral .voltar{   /* botão do rodapé → Histórias delas */
+  --hover:1.05;position:relative;margin-top:auto;width:100%;padding:12px;text-align:center;
+  font-size:1.2rem;font-weight:600;border:1.5px solid rgba(255,255,255,.3);border-radius:14px;background:rgba(28,18,44,.45);
+}
+
+/* ---------- [4] SEÇÕES DAS PÁGINAS DEDICADAS ---------- */
+.sec{min-height:100svh;padding:48px clamp(20px,4vw,64px);display:grid;align-content:center;gap:0}
+.sec+.sec{border-top:1px solid var(--panel-line)}
+.rotulo{font-size:clamp(1.7rem,3vw,2.4rem);font-weight:600;color:var(--mint);line-height:1}   /* "Quem foi", "Sua contribuição" */
+.titulao{font-size:clamp(3rem,7vw,5.6rem);line-height:1;font-weight:600}                        /* nome / título grande */
+.pg-dedicada .tit-md{font-size:clamp(2.4rem,5vw,4rem);color:#fff;font-weight:600;line-height:1.05}
+.areas{margin:8px 0 16px;color:var(--gold);font-weight:700;font-size:clamp(1.3rem,2.4vw,2rem)}
+.texto{max-width:64ch;line-height:1.35;font-size:1.35rem}
+.retrato{
+  height:min(80svh,660px);border-radius:20px;overflow:hidden;border:1px solid var(--panel-line);
+  background:radial-gradient(ellipse at 50% 30%,#6a4d86,#3a2552 75%);
+}
+.retrato img{width:100%;height:100%;object-fit:contain;object-position:bottom}
+
+/* Quem foi */
+.quem{grid-template-columns:minmax(240px,38%) 1fr;gap:clamp(20px,4vw,56px);align-items:center}
+.citacao{margin-top:26px;padding-left:18px;max-width:52ch;border-left:6px solid var(--gold);color:var(--gold);text-transform:uppercase;letter-spacing:.02em;font-size:1.35rem;line-height:1.2}
+.citacao cite{display:block;margin-top:8px;font-size:1rem;font-style:normal;opacity:.8}
+
+/* Sua contribuição */
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;margin-top:34px}
+.cartao{padding:24px;border-radius:28px;background:var(--panel);border:1px solid var(--panel-line);text-align:center;transition:transform .3s var(--ease)}
+.cartao:hover{transform:translateY(-6px)}
+.cartao h3{color:var(--gold);font-size:1.8rem;font-weight:700}
+.cartao svg{width:54px;height:54px;margin:12px auto;display:block;fill:none;stroke:var(--mint);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.cartao p{text-align:left;font-size:1.25rem;line-height:1.3}
+
+/* Curiosidades */
+.curio{grid-template-columns:minmax(200px,28%) 1fr;gap:clamp(20px,4vw,48px);align-items:start}
+/* CURIOSIDADES: a caixa acompanha o tamanho da foto, sem espaço sobrando */
+.curio .retrato{height:auto;align-self:start}
+.curio .retrato img{display:block;width:100%;height:auto;max-height:min(60svh,460px);object-fit:cover;object-position:center top}
+.curio ul{list-style:none;display:grid;gap:16px;margin-top:22px}
+.curio li{padding:18px 22px 18px 52px;position:relative;border-radius:18px;background:var(--panel);border:1px solid var(--panel-line);font-size:1.3rem;line-height:1.3}
+.curio li::before{content:"";position:absolute;left:20px;top:22px;width:18px;height:18px;background:var(--gold);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%)}
+
+/* ---------- [5] BOTÃO VOLTAR AO TOPO ---------- */
+.topo-btn{
+  position:fixed;right:24px;bottom:24px;z-index:70;width:54px;height:54px;border-radius:50%;
+  background:var(--mint);border:3px solid var(--ink);display:grid;place-items:center;
+  opacity:0;visibility:hidden;translate:0 16px;
+  transition:opacity .3s,translate .4s var(--ease),transform .3s var(--ease),visibility 0s .3s;
+}
+.topo-btn.visivel{opacity:1;visibility:visible;translate:0 0;transition-delay:0s}   /* aparece após rolar (ver script.js) */
+.topo-btn svg{width:26px;height:26px;fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- [6] RESPONSIVO ---------- */
+@media (max-width:860px){
+  html{scroll-padding-top:64px}
+  .pg-dedicada{padding-left:0;padding-top:64px}
+  .lateral{inset:0 0 auto 0;width:100%;height:64px;flex-direction:row;align-items:center;padding:6px 12px;gap:6px;overflow-x:auto}
+  .lateral::before{display:none}
+  .logo-lat{width:48px;flex:none}
+  .lateral nav{display:flex;margin:0 0 0 8px;gap:2px;width:auto}
+  .lateral nav a{padding:8px 10px;font-size:1.05rem;white-space:nowrap}
+  .lateral .voltar{margin:0 0 0 auto;width:auto;white-space:nowrap;padding:8px 12px;font-size:1rem}
+  .sec{min-height:auto;padding-top:36px;padding-bottom:36px}
+  .quem,.curio{grid-template-columns:1fr}
+  .retrato{height:min(55svh,420px)}
+  .curio .retrato img{max-height:min(55svh,420px)}
+}
+
+
+/* =====================================================================
+   PÁGINA "CURSOS" (cursos.html)
+   ÍNDICE (use Ctrl+F):
+     [C1] TOPO: menu, logo, busca e botão de perfil
+     [C2] FILTRO (coluna da direita)
+     [C3] CARDS DOS CURSOS (foto, nome, link, horas, nível, diploma)
+     [C4] RESPONSIVO
+   Usa as mesmas variáveis de cor da home (--mint, --gold, --menu, --panel...).
+   ===================================================================== */
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- [C1] TOPO ---------- */
+.cursos-topo{display:flex;align-items:center;gap:18px;padding:22px 100px 0;max-width:1400px;margin:0 auto}
+.pilula-logo{flex:1;height:var(--btn);display:flex;align-items:center;justify-content:center;border-radius:999px;background:var(--panel);border:1px solid var(--panel-line)}
+.logo-mini{--hover:1.1;display:block;height:calc(var(--btn) + 12px);aspect-ratio:1;border-radius:50%;background:#fff}   /* logo → home */
+.logo-mini img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.busca-topo{position:relative;flex:1}
+.busca-topo svg{position:absolute;left:16px;top:50%;translate:0 -50%;width:22px;height:22px;fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
+.busca-topo input{width:100%;height:var(--btn);padding:0 20px 0 48px;border-radius:999px;border:3px solid var(--mint);background:#fff;color:var(--ink);font:500 1.05rem 'Rubik',sans-serif}
+
+/* Botão de perfil (canto superior direito) + caixinha que aparece ao passar o mouse */
+.perfil{position:fixed;top:22px;right:24px;z-index:60}
+.perfil .icon-btn{position:static}
+.perfil-card{
+  position:absolute;top:calc(100% + 12px);right:0;width:240px;padding:16px 18px;border-radius:16px;
+  background:var(--menu);border:1px solid var(--panel-line);box-shadow:0 14px 34px rgba(0,0,0,.4);
+  opacity:0;visibility:hidden;translate:0 -8px;pointer-events:none;
+  transition:opacity .25s,translate .35s var(--ease),visibility 0s .25s;
+}
+.perfil:hover .perfil-card,.perfil:focus-within .perfil-card{opacity:1;visibility:visible;translate:0 0;transition-delay:0s}
+.perfil-card strong{display:block;font-size:1.15rem;margin-bottom:8px}
+.perfil-card p{display:flex;justify-content:space-between;gap:10px;padding:5px 0;font-size:.95rem;color:var(--texto);border-top:1px solid var(--panel-line)}
+.perfil-card span{color:var(--gold);font-weight:600}
+
+/* ---------- [C2] FILTRO (à direita, para não colidir com o menu lateral) ---------- */
+.cursos-main{display:grid;grid-template-columns:1fr 280px;gap:28px;max-width:1300px;margin:30px auto 64px;padding:0 24px;align-items:start}
+.filtro{position:sticky;top:24px;padding:22px;border-radius:22px;background:var(--panel);border:1px solid var(--panel-line)}
+.filtro fieldset{border:0;margin-bottom:20px}
+.filtro legend,.filtro .rotulo-f{display:block;margin-bottom:10px;font-size:1.15rem;font-weight:600;color:var(--mint)}
+.filtro label{display:flex;align-items:center;gap:10px;padding:6px 0;cursor:pointer}
+.filtro input[type=checkbox],.filtro input[type=range]{accent-color:var(--mint)}
+.filtro input[type=checkbox]{width:18px;height:18px}
+.filtro input[type=range]{width:100%}
+.tempo-val{display:block;margin-top:4px;font-size:.95rem;color:var(--gold)}
+.limpar{--hover:1.05;width:100%;padding:10px;border-radius:12px;border:1.5px solid rgba(255,255,255,.3);background:rgba(28,18,44,.45);color:#fff;font:500 1rem 'Rubik',sans-serif}
+
+/* ---------- [C3] CARDS DOS CURSOS ---------- */
+.cursos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px}
+.curso{
+  position:relative;display:flex;flex-direction:column;gap:12px;padding:16px;min-height:360px;border-radius:22px;
+  background:var(--panel);border:1px solid var(--panel-line);transition:transform .3s var(--ease),box-shadow .3s;
+}
+.curso:hover{transform:translateY(-6px);box-shadow:0 18px 36px rgba(0,0,0,.35)}
+.curso-foto{aspect-ratio:16/10;border-radius:14px;display:grid;place-items:center;color:var(--texto);font-size:.95rem;overflow:hidden;
+  background:var(--foto-bg,radial-gradient(ellipse at 50% 30%,#6a4d86,#3a2552 75%))}   /* --foto-bg: cor lisa do fundo da imagem (opcional, definida no HTML) */
+.curso-foto{position:relative}
+.curso-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center}   /* imagem inteira, centralizada, sem cortar */
+.curso h2{font-size:1.3rem;font-weight:600}
+.curso .area{color:var(--gold);font-weight:500;font-size:.95rem}
+.curso-link{--hover:1.06;align-self:flex-start;padding:9px 18px;border-radius:999px;background:var(--mint);color:var(--ink);font-weight:600;border:3px solid var(--ink)}
+.curso-rodape{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.95rem}
+.horas{color:var(--texto)}
+.nivel{padding:5px 14px;border-radius:999px;border:1.5px solid var(--gold);color:var(--gold);font-weight:600}   /* canto inferior direito */
+
+/* Símbolo de diploma (canto superior direito) + mensagem ao passar o mouse */
+.diploma{position:absolute;top:26px;right:26px;z-index:5;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--gold);border:3px solid var(--ink);cursor:help}
+.diploma svg{width:22px;height:22px;fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.diploma .dica{
+  position:absolute;top:calc(100% + 8px);right:0;white-space:nowrap;padding:8px 14px;border-radius:10px;
+  background:var(--ink);color:#fff;font-size:.9rem;font-weight:500;border:1px solid var(--panel-line);
+  opacity:0;visibility:hidden;translate:0 -6px;pointer-events:none;transition:opacity .2s,translate .3s var(--ease),visibility 0s .2s;
+}
+.diploma:hover .dica,.diploma:focus-visible .dica{opacity:1;visibility:visible;translate:0 0;transition-delay:0s}
+.vazio-cursos{margin-top:30px;font-size:1.15rem;color:var(--texto)}
+
+/* ---------- [C4] RESPONSIVO ---------- */
+@media (max-width:900px){
+  .cursos-main{grid-template-columns:1fr}
+  .filtro{position:static;order:-1}   /* filtro vai para cima do grid no celular */
+}
+@media (max-width:700px){
+  .cursos-topo{padding:16px 70px 0 70px;gap:10px}
+  .pilula-logo{flex:0 0 74px}
+}
+
+
+/* =====================================================================
+   PÁGINA "CHAT" (chat.html) — ÁREA DE EDIÇÃO DEDICADA
+   Três telas na mesma página: LISTA → CHAT PRIVADO ou CHAT EM GRUPO.
+   ÍNDICE (use Ctrl+F):
+     [CH1] COMPONENTES COMUNS (ícones, avatar, mensagens, campo de digitar)
+     [CH2] LISTA DE CONVERSAS (grupos separados de privados)
+     [CH3] CHAT PRIVADO
+     [CH4] CHAT EM GRUPO (vídeo, participantes, resumo + sala de chat à direita)
+     [CH5] RESPONSIVO
+   Usa as mesmas variáveis de cor da home (--mint, --gold, --menu, --panel...).
+   ===================================================================== */
+
+/* ---------- [CH1] COMPONENTES COMUNS ---------- */
+.sprite{position:absolute;width:0;height:0}
+.ic{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ic.rot{transform:rotate(135deg)}   /* ícone de desligar */
+.vista{animation:entrar .4s var(--ease)}
+@keyframes entrar{from{opacity:0;translate:0 14px}}
+
+.avatar{flex:none;width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:var(--mint);color:var(--ink);border:3px solid var(--ink)}
+.avatar.sm{width:34px;height:34px;border-width:2px}.avatar.sm .ic{width:18px;height:18px}
+.avatar.lg{width:68px;height:68px}.avatar.lg .ic{width:32px;height:32px}
+
+.btn-circ{--hover:1.1;flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--panel-line);background:rgba(28,18,44,.45);color:#fff;cursor:pointer}
+.btn-circ.off{opacity:.45}                      /* botão "desligado" (mic, câmera...) */
+.btn-circ.gold{background:var(--gold);color:var(--ink);border:3px solid var(--ink)}   /* desligar chamada */
+
+/* Mensagens (usadas no chat privado e na sala de chat do grupo) */
+.msgs{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px;padding:14px}
+.linha{display:flex;align-items:flex-end;gap:10px}
+.linha.minha{flex-direction:row-reverse}
+.bolha{max-width:min(75%,420px);padding:10px 14px 6px;border-radius:18px 18px 18px 6px;background:rgba(83,58,107,.9);line-height:1.35;overflow-wrap:anywhere}   /* mensagem recebida */
+.linha.minha .bolha{background:var(--mint);color:var(--ink);border-radius:18px 18px 6px 18px}                                                /* mensagem enviada */
+.bolha b{display:block;font-size:.85rem;color:var(--gold)}
+.bolha time{display:block;text-align:right;margin-top:3px;font-size:.72rem;color:var(--gold)}
+.linha.minha .bolha time{color:var(--ink);opacity:.7}
+.dia{align-self:center;font-size:.8rem;color:var(--texto);opacity:.75}
+.digitando{align-self:flex-start;display:flex;gap:5px;padding:12px 16px;border-radius:18px;background:rgba(83,58,107,.9)}
+.digitando i{width:7px;height:7px;border-radius:50%;background:#fff;animation:pulo 1s infinite}
+.digitando i:nth-child(2){animation-delay:.15s}.digitando i:nth-child(3){animation-delay:.3s}
+@keyframes pulo{50%{translate:0 -4px;opacity:.5}}
+
+/* Campo de digitar + botão Enviar */
+.compor{display:flex;align-items:center;gap:10px;padding:14px}
+.campo{flex:1;position:relative}
+.campo input{width:100%;height:48px;padding:0 20px;border-radius:999px;border:3px solid var(--mint);background:#fff;color:var(--ink);font:500 1rem 'Rubik',sans-serif}
+.campo.com-mic input{padding-right:52px}
+.campo .mic{position:absolute;right:6px;top:50%;translate:0 -50%;width:36px;height:36px;border:0;background:none;color:var(--ink);display:grid;place-items:center}
+.enviar{--hover:1.06;height:48px;padding:0 26px;border-radius:999px;border:3px solid var(--ink);background:var(--mint);color:var(--ink);font:600 1.05rem 'Rubik',sans-serif}
+
+/* ---------- [CH2] LISTA DE CONVERSAS ---------- */
+.lista-wrap{max-width:760px;margin:0 auto;padding:22px 20px 56px}
+.lista-topo{margin-bottom:26px}
+.bloco{margin-bottom:22px;padding:18px;border-radius:26px;background:rgba(255,255,255,.04);border:1px solid var(--panel-line)}
+.bloco h2{margin:0 0 14px 6px;font-size:1.4rem;font-weight:600;color:var(--mint)}   /* "Grupos" / "Chats privados" */
+.conv{display:flex;align-items:center;gap:14px;width:100%;padding:14px 18px;border-radius:20px;background:var(--panel);border:1px solid var(--panel-line);color:inherit;font:inherit;text-align:left;cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s}
+.conv+.conv{margin-top:12px}
+.conv:hover,.conv:focus-visible{transform:translateY(-3px) scale(1.01);box-shadow:0 14px 30px rgba(0,0,0,.3)}
+.conv-txt{flex:1;min-width:0}
+.conv-txt strong{display:block;font-size:1.1rem;font-weight:600}
+.previa{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.95rem;color:var(--texto);opacity:.85}
+.conv-meta{display:grid;justify-items:end;gap:6px;min-height:42px;font-size:.8rem;color:var(--gold)}
+.badge{min-width:22px;height:22px;padding:0 6px;border-radius:999px;display:grid;place-items:center;background:var(--gold);color:var(--ink);font-size:.8rem;font-weight:600}
+
+/* ---------- [CH3] CHAT PRIVADO ---------- */
+.priv{max-width:820px;margin:0 auto;height:100svh;padding:22px 20px 20px}
+.priv-painel{height:100%;display:flex;flex-direction:column;border-radius:26px;background:var(--panel);border:1px solid var(--panel-line);overflow:hidden}
+.priv-topo{display:flex;align-items:center;gap:12px;padding:14px 16px;background:rgba(28,18,44,.35);border-bottom:1px solid var(--panel-line)}
+.priv-topo .info{flex:1;min-width:0}
+.priv-topo strong{display:block;font-size:1.15rem}
+.priv-topo small{color:var(--texto);opacity:.8}
+
+/* ---------- [CH4] CHAT EM GRUPO ---------- */
+.grupo{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;max-width:1400px;margin:0 auto;padding:22px 24px 40px;align-items:start}
+.grupo-topo{min-height:52px;padding-left:76px}   /* espaço do botão do menu */
+.ola{font-size:2rem;line-height:1.1;color:var(--texto)}
+.ola b{color:#fff;font-weight:600}
+.grupo-sub{color:var(--gold);font-size:1.1rem}
+
+.video{position:relative;margin-top:22px;height:clamp(280px,46svh,430px);display:grid;place-items:center;border-radius:24px;background:var(--panel);border:1px solid var(--panel-line);transition:height .5s var(--ease)}
+.video.grande{height:min(72svh,640px)}
+.video .cam{width:96px;height:96px;stroke-width:1.2;opacity:.25}
+.live{position:absolute;top:16px;left:16px;display:flex;align-items:center;gap:10px;padding:8px 16px;border:0;border-radius:999px;background:rgba(28,18,44,.55);color:#fff;font:500 1rem 'Rubik',sans-serif;cursor:pointer}
+.live i{width:18px;height:18px;border-radius:50%;background:#8a7a9c;transition:background .3s,box-shadow .3s}
+.live.ativo i{background:var(--mint);box-shadow:0 0 0 4px rgba(142,209,168,.3)}
+.recolher{position:absolute;top:16px;right:16px}
+.volume{position:absolute;right:16px;top:50%;translate:0 -50%;display:grid;justify-items:center;gap:10px;padding:12px 6px;border-radius:999px;background:rgba(28,18,44,.5)}
+.volume input{writing-mode:vertical-lr;direction:rtl;width:24px;height:110px;accent-color:var(--mint)}
+.ctrls{position:absolute;bottom:18px;left:50%;translate:-50% 0;display:flex;gap:10px;padding:10px 14px;border-radius:999px;background:rgba(28,18,44,.55)}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-top:20px}
+.tile{display:grid;justify-items:center;gap:10px;padding:18px 10px;border-radius:20px;background:var(--panel);border:1px solid var(--panel-line)}
+.tile p{display:flex;align-items:center;gap:8px;font-size:.9rem}
+.tile .mudo{width:26px;height:26px;padding:5px;border-radius:50%;background:rgba(28,18,44,.6)}
+
+.resumo-tit{margin:28px 0 12px;font-size:1.4rem;font-weight:600;color:var(--mint)}   /* "Resumo das reuniões" */
+.reuniao{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-bottom:12px;padding:12px 16px;border-radius:18px;background:var(--panel);border:1px solid var(--panel-line)}
+.reuniao .info{flex:1 1 200px}
+.reuniao strong{display:block;font-weight:500}
+.reuniao small{display:flex;align-items:center;gap:6px;color:var(--texto)}
+.reuniao small .ic{width:16px;height:16px}
+.progresso{display:flex;align-items:center;gap:12px;font-size:.9rem}
+.barra{width:140px;height:12px;border-radius:999px;background:rgba(28,18,44,.6);overflow:hidden}
+.barra i{display:block;height:100%;border-radius:999px;background:var(--mint)}
+
+/* Coluna da direita: SÓ busca + sala de chat (sem upgrade nem sino) */
+.grupo-lateral{position:sticky;top:22px;height:calc(100svh - 44px);display:flex;flex-direction:column;gap:12px;padding-top:16px;border-radius:24px;overflow:hidden;background:var(--panel);border:1px solid var(--panel-line)}
+.grupo-lateral .busca-topo{flex:none;margin:0 16px}
+.grupo-lateral h2{margin:6px 16px 0;font-size:1.2rem;font-weight:600;color:var(--mint)}   /* "Sala de chat" */
+
+/* ---------- [CH5] RESPONSIVO ---------- */
+@media (max-width:1100px){
+  .grupo{grid-template-columns:1fr}
+  .grupo-lateral{position:static;height:520px}
+}
+@media (max-width:1000px){
+  .priv{padding-top:88px}
+  .lista-topo{padding-left:76px}
+}
+@media (max-width:600px){
+  .bolha{max-width:85%}
+  .progresso{flex:1 1 100%}
+  .ctrls{gap:6px;padding:8px 10px}
+  .volume{display:none}
+}

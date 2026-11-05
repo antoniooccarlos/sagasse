@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ada Lovelace – Sagasse</title>
+   <link rel="icon" type="image/png" href="/imgs/iconssagassemini.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="pg-dedicada">
+
+  <!-- BARRA LATERAL FIXA — estilos em style.css › [3] BARRA LATERAL FIXA -->
+  <aside class="lateral">
+    <a class="anim logo-lat" href="/index.html" aria-label="Voltar à página inicial"><img src="/imgs/iconssagasselogo.png" alt="Sagasse"></a>
+    <nav aria-label="Seções desta página">
+      <a class="anim" href="#quem-foi">Quem foi</a>
+      <a class="anim" href="#contribuicao">Sua contribuição</a>
+      <a class="anim" href="#curiosidades">Curiosidades</a>
+    </nav>
+    <a class="anim voltar" href="/pagesHome/historias.html">← Histórias delas</a>
+  </aside>
+
+  <main>
+    <!-- SEÇÃO 1: QUEM FOI — style.css › [4] -->
+    <section class="sec quem" id="quem-foi">
+      <figure class="retrato"><img src="/imgs/Adahomepage.png" alt="Retrato de Ada Lovelace escrevendo à luz de vela"></figure>
+      <div>
+        <p class="rotulo">Quem foi</p>
+        <h1 class="titulao">Ada Lovelace</h1>
+        <p class="areas">Matemática - Computação</p>
+        <p class="texto">Augusta Ada King, condessa de Lovelace, nasceu em Londres em 1815, filha do poeta Lord Byron. Estimulada pela mãe a estudar matemática, tornou-se parceira intelectual de Charles Babbage, inventor da Máquina Analítica, e foi além do cálculo: enxergou que uma máquina poderia manipular símbolos, música e arte.</p>
+        <blockquote class="citacao">“A Máquina Analítica tece padrões algébricos assim como o tear de Jacquard tece flores e folhas.”<cite>Ada Lovelace, Notas, 1843</cite></blockquote>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: SUA CONTRIBUIÇÃO (para incluir uma imagem, como a máquina do mockup, adicione um <img> aqui) -->
+    <section class="sec" id="contribuicao">
+      <p class="rotulo">Sua contribuição</p>
+      <h2 class="titulao tit-md">O Primeiro Algoritmo</h2>
+      <p class="texto">Em 1843, ao traduzir um artigo sobre a Máquina Analítica, Ada acrescentou notas mais extensas que o próprio texto. Nelas descreveu, passo a passo, um método para calcular números de Bernoulli, considerado o primeiro programa de computador publicado.</p>
+      <div class="cards3">
+        <article class="cartao">
+          <h3>Matemática</h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>
+          <p>Aplicou a lógica matemática para planejar instruções que uma máquina poderia executar, muito antes de existirem computadores.</p>
+        </article>
+        <article class="cartao">
+          <h3>Reconhecimento</h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v6a5 5 0 0 1-10 0z"/><path d="M7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3"/></svg>
+          <p>É lembrada como a primeira programadora da história, e todo mês de outubro o Dia de Ada Lovelace celebra as mulheres na ciência.</p>
+        </article>
+        <article class="cartao">
+          <h3>Visão de futuro</h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>
+          <p>Sua ideia de máquinas que vão além dos números antecipou o computador moderno e inspirou gerações na tecnologia.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 3: CURIOSIDADES -->
+    <section class="sec curio" id="curiosidades">
+      <figure class="retrato"><img src="/imgs/Adacuriosidade.jpeg" alt="Retrato de Ada Lovelace escrevendo à luz de vela"></figure>
+      <div>
+        <h2 class="titulao tit-md">Curiosidades</h2>
+        <ul>
+        <li>Era filha do poeta Lord Byron, mas foi criada pela mãe, que a incentivou a estudar matemática e ciências.</li>
+        <li>Charles Babbage a chamava de “a encantadora dos números”.</li>
+        <li>Em 1980, uma linguagem de programação criada para o Departamento de Defesa dos EUA foi batizada de Ada em sua homenagem; o número do padrão, 1815, é o ano em que ela nasceu.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- BOTÃO VOLTAR AO TOPO (aparece ao rolar; lógica em script.js) -->
+  <button class="anim topo-btn" type="button" aria-label="Voltar ao topo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>

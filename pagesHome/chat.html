@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conversas – Sagasse</title>
+  <link rel="icon" type="image/png" href="/imgs/iconssagassemini.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="pg-chat">
+  <!-- ÍCONES reutilizados na página (use com <svg class="ic"><use href="#i-nome"/></svg>) -->
+  <svg class="sprite" aria-hidden="true"><symbol id="i-voltar" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol><symbol id="i-fone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol><symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="12" height="12" rx="2"/><path d="M15 10l6-3v10l-6-3z"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/></symbol><symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol><symbol id="i-micoff" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M3 3l18 18"/></symbol><symbol id="i-lupa" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol><symbol id="i-rec" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3" fill="currentColor"/></symbol><symbol id="i-recolher" viewBox="0 0 24 24"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></symbol><symbol id="i-som" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/></symbol><symbol id="i-mais" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="12" cy="19" r="1.2"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></symbol><symbol id="i-grupo" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.8 0 4.5 1.9 4.5 4.5"/></symbol><symbol id="i-relogio" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol></svg>
+
+  <!-- BOTÃO DO MENU (canto superior esquerdo) — mesma função das outras páginas -->
+  <button class="anim icon-btn menu-toggle" id="menuToggle" type="button"
+          aria-label="Abrir menu" aria-expanded="false" aria-controls="sidebar">
+    <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
+
+  <!-- MENU LATERAL (igual ao da home) -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="sidebar" id="sidebar" aria-label="Menu principal" inert>
+    <nav>
+      <ul>
+        <li style="--i:0"><a class="anim menu-link" href="/index.html">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></span>
+          Início</a></li>
+        <li style="--i:1"><a class="anim menu-link" href="/pagesHome/historias.html">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5.5C4.5 4 8 4 12 6c4-2 7.5-2 10-.5V19c-2.5-1.5-6-1.5-10 .5-4-2-7.5-2-10-.5z"/><path d="M12 6v13.5"/></svg></span>
+          Histórias delas</a></li>
+        <li style="--i:2"><a class="anim menu-link" href="/pagesHome/chat.html">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.8 7L4 20.5 5.5 16A8 8 0 1 1 21 12z"/></svg></span>
+          Chat</a></li>
+        <li style="--i:3"><a class="anim menu-link" href="/pagesHome/cursos.html">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-4.5"/><path d="M22 9v6"/></svg></span>
+          Cursos</a></li>
+        <li style="--i:4"><a class="anim menu-link" href="/pagesHome/quiz.html">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7"/><path d="M12 17h.01"/></svg></span>
+          Quiz</a></li>
+      </ul>
+    </nav>
+    <a class="anim config-link" href="#">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+      Configurações
+    </a>
+  </aside>
+
+  <main>
+    <h1 class="sr-only">Conversas</h1>
+
+    <!-- ===== TELA 1: LISTA — style.css › [CH2] ===== -->
+    <section class="vista" id="vistaLista">
+      <div class="lista-wrap">
+        <div class="lista-topo"><div class="busca-topo"><svg class="ic " aria-hidden="true"><use href="#i-lupa"/></svg><input id="buscaChat" type="search" placeholder="Buscar conversa..." aria-label="Buscar conversa"></div></div>
+
+        <!-- GRUPOS (separados dos privados). data-nome = nome exibido ao abrir -->
+        <section class="bloco" aria-label="Grupos">
+          <h2>Grupos</h2>
+        <button class="conv" type="button" data-tipo="grupo" data-nome="Grupo 1 – Estudos de TI">
+          <span class="avatar "><svg class="ic " aria-hidden="true"><use href="#i-grupo"/></svg></span>
+          <span class="conv-txt"><strong>Grupo 1 – Estudos de TI</strong><span class="previa">Boa! Alguém já terminou o curso?</span></span>
+          <span class="conv-meta"><time>14:20</time><span class="badge">3</span></span>
+        </button>
+        <button class="conv" type="button" data-tipo="grupo" data-nome="Grupo 2 – Bate-papo">
+          <span class="avatar "><svg class="ic " aria-hidden="true"><use href="#i-grupo"/></svg></span>
+          <span class="conv-txt"><strong>Grupo 2 – Bate-papo</strong><span class="previa">Oi pessoal, o que vocês acharam?</span></span>
+          <span class="conv-meta"><time>Ontem</time></span>
+        </button>
+        </section>
+
+        <!-- CHATS PRIVADOS -->
+        <section class="bloco" aria-label="Chats privados">
+          <h2>Chats privados</h2>
+        <button class="conv" type="button" data-tipo="privado" data-nome="Contato 1">
+          <span class="avatar "><svg class="ic " aria-hidden="true"><use href="#i-user"/></svg></span>
+          <span class="conv-txt"><strong>Contato 1</strong><span class="previa">Oi, tudo bem?</span></span>
+          <span class="conv-meta"><time>14:45</time><span class="badge">1</span></span>
+        </button>
+        <button class="conv" type="button" data-tipo="privado" data-nome="Contato 2">
+          <span class="avatar "><svg class="ic " aria-hidden="true"><use href="#i-user"/></svg></span>
+          <span class="conv-txt"><strong>Contato 2</strong><span class="previa">Obrigada pela dica!</span></span>
+          <span class="conv-meta"><time>13:10</time></span>
+        </button>
+        <button class="conv" type="button" data-tipo="privado" data-nome="Contato 3">
+          <span class="avatar "><svg class="ic " aria-hidden="true"><use href="#i-user"/></svg></span>
+          <span class="conv-txt"><strong>Contato 3</strong><span class="previa">Vamos estudar juntas amanhã?</span></span>
+          <span class="conv-meta"><time>Ontem</time><span class="badge">2</span></span>
+        </button>
+        <button class="conv" type="button" data-tipo="privado" data-nome="Contato 4">
+          <span class="avatar "><svg class="ic " aria-hidden="true"><use href="#i-user"/></svg></span>
+          <span class="conv-txt"><strong>Contato 4</strong><span class="previa">Combinado, até mais!</span></span>
+          <span class="conv-meta"><time>Seg</time></span>
+        </button>
+        </section>
+        <p class="vazio" id="vazioChat" hidden>Nenhuma conversa encontrada.</p>
+      </div>
+    </section>
+
+    <!-- ===== TELA 2: CHAT PRIVADO — style.css › [CH3] ===== -->
+    <section class="vista priv" id="vistaPrivado" hidden>
+      <div class="priv-painel">
+        <header class="priv-topo">
+          <a class="anim btn-circ" href="#lista" aria-label="Voltar para a lista"><svg class="ic " aria-hidden="true"><use href="#i-voltar"/></svg></a>
+          <span class="avatar "><svg class="ic " aria-hidden="true"><use href="#i-user"/></svg></span>
+          <div class="info"><strong id="privNome">Contato 1</strong><small>(00) 00000-0000</small></div>  <!-- telefone: EXEMPLO -->
+          <button class="anim btn-circ" type="button" aria-label="Ligar"><svg class="ic " aria-hidden="true"><use href="#i-fone"/></svg></button>
+          <button class="anim btn-circ" type="button" aria-label="Chamada de vídeo"><svg class="ic " aria-hidden="true"><use href="#i-video"/></svg></button>
+          <button class="anim btn-circ" type="button" aria-label="Informações"><svg class="ic " aria-hidden="true"><use href="#i-info"/></svg></button>
+        </header>
+        <!-- MENSAGENS (mensagens de EXEMPLO; troque pelas reais) -->
+        <div class="msgs" id="msgsPriv">
+      <p class="dia">Ontem</p>
+      <div class="linha"><div class="bolha">Estou pensando em começar um curso de programação. Você recomenda algum?<time>10:02</time></div></div>
+      <div class="linha minha"><div class="bolha">Recomendo começar por lógica de programação, é a base de tudo.<time>10:05</time></div></div>
+      <p class="dia">Hoje</p>
+      <div class="linha"><div class="bolha">Faz sentido! Por onde você começaria?<time>14:30</time></div></div>
+      <div class="linha minha"><div class="bolha">Que tal o curso de Python para iniciantes? Dá para ver na página de Cursos.<time>14:32</time></div></div>
+      <div class="digitando" aria-label="Digitando"><i></i><i></i><i></i></div>
+        </div>
+        <form class="compor" data-alvo="#msgsPriv">
+          <div class="campo com-mic"><input type="text" placeholder="Digite sua mensagem..." aria-label="Digite sua mensagem" autocomplete="off">
+            <button class="mic" type="button" aria-label="Gravar áudio"><svg class="ic " aria-hidden="true"><use href="#i-mic"/></svg></button></div>
+          <button class="anim enviar" type="submit">Enviar</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===== TELA 3: CHAT EM GRUPO — style.css › [CH4] ===== -->
+    <section class="vista grupo" id="vistaGrupo" hidden>
+      <div class="grupo-main">
+        <header class="grupo-topo">
+          <p class="ola">Olá, <b>Usuário</b></p>
+          <p class="grupo-sub" id="grupoNome">Grupo 1 – Estudos de TI</p>
+        </header>
+
+        <!-- ÁREA DE VÍDEO -->
+        <div class="video">
+          <button class="live anim" type="button" data-alternar="ativo">Live <i></i></button>
+          <button class="anim btn-circ recolher" type="button" data-alternar="grande" data-alvo=".video" aria-label="Expandir ou recolher vídeo"><svg class="ic " aria-hidden="true"><use href="#i-recolher"/></svg></button>
+          <svg class="ic cam" aria-hidden="true"><use href="#i-video"/></svg>
+          <div class="volume">
+            <input type="range" min="0" max="100" value="60" aria-label="Volume">
+            <button class="anim btn-circ" type="button" aria-label="Som"><svg class="ic " aria-hidden="true"><use href="#i-som"/></svg></button>
+          </div>
+          <div class="ctrls">
+            <button class="anim btn-circ" type="button" data-alternar="off" aria-label="Gravar"><svg class="ic " aria-hidden="true"><use href="#i-rec"/></svg></button>
+            <button class="anim btn-circ" type="button" data-alternar="off" aria-label="Câmera"><svg class="ic " aria-hidden="true"><use href="#i-video"/></svg></button>
+            <button class="anim btn-circ" type="button" data-alternar="off" aria-label="Microfone"><svg class="ic " aria-hidden="true"><use href="#i-mic"/></svg></button>
+            <a class="anim btn-circ gold" href="#lista" aria-label="Sair da chamada"><svg class="ic rot" aria-hidden="true"><use href="#i-fone"/></svg></a>
+          </div>
+        </div>
+
+        <!-- PARTICIPANTES -->
+        <div class="tiles">
+        <div class="tile"><span class="avatar lg"><svg class="ic " aria-hidden="true"><use href="#i-user"/></svg></span><p><svg class="ic mudo" aria-hidden="true"><use href="#i-micoff"/></svg>Usuário 1</p></div>
+        <div class="tile"><span class="avatar lg"><svg class="ic " aria-hidden="true"><use href="#i-user"/></svg></span><p><svg class="ic mudo" aria-hidden="true"><use href="#i-micoff"/></svg>Usuário 2</p></div>
+        <div class="tile"><span class="avatar lg"><svg class="ic " aria-hidden="true"><use href="#i-user"/></svg></span><p><svg class="ic mudo" aria-hidden="true"><use href="#i-micoff"/></svg>Usuário 3</p></div>
+        <div class="tile"><span class="avatar lg"><svg class="ic " aria-hidden="true"><use href="#i-user"/></svg></span><p><svg class="ic mudo" aria-hidden="true"><use href="#i-micoff"/></svg>Usuário 4</p></div>
+        </div>
+
+        <!-- RESUMO DAS REUNIÕES (dados de EXEMPLO) -->
+        <h2 class="resumo-tit">Resumo das reuniões</h2>
+      <div class="reuniao">
+        <span class="avatar "><svg class="ic " aria-hidden="true"><use href="#i-grupo"/></svg></span>
+        <div class="info"><strong>Reunião de alinhamento</strong><small><svg class="ic " aria-hidden="true"><use href="#i-relogio"/></svg>20 min</small></div>
+        <span>Tarefas: 2</span>
+        <div class="progresso">Concluído: 9/10<div class="barra"><i style="width:90%"></i></div></div>
+        <button class="anim btn-circ" type="button" aria-label="Mais opções"><svg class="ic " aria-hidden="true"><use href="#i-mais"/></svg></button>
+      </div>
+      <div class="reuniao">
+        <span class="avatar "><svg class="ic " aria-hidden="true"><use href="#i-grupo"/></svg></span>
+        <div class="info"><strong>Reunião de estudos</strong><small><svg class="ic " aria-hidden="true"><use href="#i-relogio"/></svg>35 min</small></div>
+        <span>Tarefas: 1</span>
+        <div class="progresso">Concluído: 4/10<div class="barra"><i style="width:40%"></i></div></div>
+        <button class="anim btn-circ" type="button" aria-label="Mais opções"><svg class="ic " aria-hidden="true"><use href="#i-mais"/></svg></button>
+      </div>
+      </div>
+
+      <!-- COLUNA DA DIREITA: só busca + sala de chat (sem upgrade e sem sino) -->
+      <aside class="grupo-lateral">
+        <div class="busca-topo"><svg class="ic " aria-hidden="true"><use href="#i-lupa"/></svg><input id="buscaGrupo" type="search" placeholder="Buscar na sala..." aria-label="Buscar mensagens"></div>
+        <h2>Sala de chat</h2>
+        <div class="msgs" id="msgsGrupo">
+      <div class="linha"><span class="avatar sm"><svg class="ic " aria-hidden="true"><use href="#i-user"/></svg></span><div class="bolha"><b>Usuário 1</b>Pessoal, conseguiram avançar no projeto?<time>14:01</time></div></div>
+      <div class="linha minha"><span class="avatar sm"><svg class="ic " aria-hidden="true"><use href="#i-user"/></svg></span><div class="bolha">Sim! Acabei de enviar a primeira versão. Me digam o que acham.<time>14:03</time></div></div>
+      <div class="linha"><span class="avatar sm"><svg class="ic " aria-hidden="true"><use href="#i-user"/></svg></span><div class="bolha"><b>Usuário 2</b>Ficou ótimo! Só falta ajustar o espaçamento dos botões.<time>14:05</time></div></div>
+      <div class="linha"><span class="avatar sm"><svg class="ic " aria-hidden="true"><use href="#i-user"/></svg></span><div class="bolha"><b>Usuário 3</b>Combinado, assim que estiver pronto eu começo a programar.<time>14:08</time></div></div>
+      <div class="linha minha"><span class="avatar sm"><svg class="ic " aria-hidden="true"><use href="#i-user"/></svg></span><div class="bolha">Perfeito, aviso quando subir a nova versão.<time>14:10</time></div></div>
+        </div>
+        <form class="compor" data-alvo="#msgsGrupo" data-avatar="1">
+          <div class="campo"><input type="text" placeholder="Mensagem..." aria-label="Digite sua mensagem" autocomplete="off"></div>
+          <button class="anim enviar" type="submit">Enviar</button>
+        </form>
+      </aside>
+    </section>
+  </main>
+
+  <script src="/js/script.js"></script>
+  <script src="/js/chat.js"></script>
+</body>
+</html>

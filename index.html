@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sagasse – Mulheres que transformaram a tecnologia</title>
+  <meta name="description" content="Inspire-se com as pioneiras que moldaram o mundo digital.">
+  <link rel="icon" type="image/png" href="/imgs/iconssagassemini.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="/css/fonts.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="circuito" viewBox="0 0 130 140">
+      <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M0 28H44L62 12H96"/><circle cx="104" cy="12" r="5"/>
+        <path d="M0 62H80"/><circle cx="88" cy="62" r="5"/>
+        <path d="M0 92H38L56 108H98"/><circle cx="106" cy="108" r="5"/>
+        <path d="M0 126H28"/><circle cx="36" cy="126" r="4"/>
+      </g>
+    </symbol>
+  </svg>
+
+  <button class="anim icon-btn menu-toggle" id="menuToggle" type="button"
+          aria-label="Abrir menu" aria-expanded="false" aria-controls="sidebar">
+    <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
+
+  <a class="anim icon-btn bell" href="#" aria-label="Notificações">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+  </a>
+
+  <div class="overlay" id="overlay"></div>
+  <aside class="sidebar" id="sidebar" aria-label="Menu principal" inert>
+    <nav>
+      <ul>
+        <li style="--i:0"><a class="anim menu-link" href="/index.html">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></span>
+          Início</a></li>
+        <li style="--i:1"><a class="anim menu-link" href="/pagesHome/historias.html">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5.5C4.5 4 8 4 12 6c4-2 7.5-2 10-.5V19c-2.5-1.5-6-1.5-10 .5-4-2-7.5-2-10-.5z"/><path d="M12 6v13.5"/></svg></span>
+          Histórias delas</a></li>
+        <li style="--i:2"><a class="anim menu-link" href="/pagesHome/chat.html">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.8 7L4 20.5 5.5 16A8 8 0 1 1 21 12z"/></svg></span>
+          Chat</a></li>
+        <li style="--i:3"><a class="anim menu-link" href="/pagesHome/cursos.html">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-4.5"/><path d="M22 9v6"/></svg></span>
+          Cursos</a></li>
+        <li style="--i:4"><a class="anim menu-link" href="pagesHome/quiz.html">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7"/><path d="M12 17h.01"/></svg></span>
+          Quiz</a></li>
+      </ul>
+    </nav>
+    <a class="anim config-link" href="#">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 
+        2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 
+        2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 
+        2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 
+        2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 
+        0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 
+        2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+      Configurações
+    </a>
+  </aside>
+
+  <header class="topo">
+    <a class="anim logo" href="/index.html" aria-label="Sagasse – página inicial">
+      <img src="/imgs/iconssagasselogo.png" alt="Sagasse, coruja com capuz roxo">
+    </a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <svg class="circuito esq" aria-hidden="true"><use href="#circuito"/></svg>
+      <svg class="circuito dir" aria-hidden="true"><use href="#circuito"/></svg>
+      <span class="spark" style="left:12%;top:-34px;--s:22px"></span>
+      <span class="spark" style="left:5%;top:30px;--s:16px"></span>
+      <span class="spark" style="right:7%;bottom:-58px;--s:20px"></span>
+      <span class="spark" style="left:9%;bottom:-42px;--s:12px"></span>
+      <h1>Mulheres que transformaram a tecnologia</h1>
+      <p class="sub">Inspire-se com as pioneiras que moldaram o mundo digital.</p>
+    </section>
+
+    <section class="pioneiras" aria-label="Pioneiras da tecnologia">
+      <a class="card" href="/pagesDelas/Adapage.html">
+        <span class="foto"><img src="/imgs/Adahomepage.png" alt="Retrato de Ada Lovelace escrevendo à luz de vela"></span>
+        <span class="nome">Ada Lovelace</span>
+      </a>
+      <a class="card" href="/pagesDelas/Gracepage.html">
+        <span class="foto"><img src="/imgs/Gracehomepage.png" alt="Retrato de Grace Hopper com o quepe da Marinha"></span>
+        <span class="nome">Grace Hopper</span>
+      </a>
+      <a class="card" href="/pagesDelas/Margaretpage.html">
+        <span class="foto"><img src="/imgs/Margarethomepage.png" alt="Retrato de Margaret Hamilton sentada"></span>
+        <span class="nome">Margaret Hamilton</span>
+      </a>
+    </section>
+  </main>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>
