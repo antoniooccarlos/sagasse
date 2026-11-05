@@ -16,9 +16,9 @@ button{font:inherit;color:inherit;cursor:pointer}
   background-image:var(--bg-img,none),var(--bg-grad)}
 .stage::before{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(0,0,0,.6))}
 .stage>*{position:absolute}
-body[data-ep=ada]{/* fundo opcional:*/ --bg-img:url(/imgsquiz/fundoAda.jpg); --bg-grad:linear-gradient(#78c0ee,#1f4d66 60%,#0c1f2a)}
-body[data-ep=grace]{/* fundo opcional:*/ --bg-img:url(/imgsquiz/fundoGrance.jpg); --bg-grad:linear-gradient(#e9b872,#7a4a25 60%,#26150b)}
-body[data-ep=margaret]{/* fundo opcional:*/ --bg-img:url(/imgsquiz/fundoMargaret.jpg); --bg-grad:linear-gradient(#27345f,#0f1633 60%,#05070f)}
+body[data-ep=ada]{/* fundo opcional:*/ --bg-img:url(./imgsquiz/fundoAda.jpg); --bg-grad:linear-gradient(#78c0ee,#1f4d66 60%,#0c1f2a)}
+body[data-ep=grace]{/* fundo opcional:*/ --bg-img:url(./imgsquiz/fundoGrance.jpg); --bg-grad:linear-gradient(#e9b872,#7a4a25 60%,#26150b)}
+body[data-ep=margaret]{/* fundo opcional:*/ --bg-img:url(./imgsquiz/fundoMargaret.jpg); --bg-grad:linear-gradient(#27345f,#0f1633 60%,#05070f)}
 
 .topo{top:calc(var(--u)*1.6);left:calc(var(--u)*3);right:calc(var(--u)*3);display:flex;justify-content:space-between;font-size:calc(var(--u)*1.7);z-index:3}
 .topo a,.topo span{background:rgba(0,0,0,.55);padding:.3em 1em;border-radius:2em}
