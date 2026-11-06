@@ -479,3 +479,138 @@ h1{
   .ctrls{gap:6px;padding:8px 10px}
   .volume{display:none}
 }
+
+
+/* =====================================================================
+   SAGASSE HUB — HOME (index.html) + MENU DA SAGASSE (pagesHome)
+   ÁREA DE EDIÇÃO DEDICADA. ÍNDICE (use Ctrl+F):
+     [SG1] VARIÁVEIS (tamanho do botão e das opções)
+     [SG2] PRELOADER (círculo sobe, expande e mostra a Sagasse)
+     [SG3] BOTÃO DA SAGASSE (respiração + ecos + dormindo/acordada)
+     [SG4] OPÇÕES QUE FLUTUAM AO REDOR DA SAGASSE (home)
+     [SG5] TUTORIAL DA SAGASSE (1ª visita)
+     [SG6] MENU DA SAGASSE NAS PÁGINAS INTERNAS (logo → opções embaixo)
+     [SG7] AJUSTES DE ESPAÇO NAS PÁGINAS + MOVIMENTO REDUZIDO
+     [SG8] TÍTULO DO TOPO DA HOME (caixa "Sagasse – conectando mulheres e ideias")
+   ===================================================================== */
+
+/* ---------- [SG1] VARIÁVEIS ---------- */
+:root{
+  --sg-d:clamp(180px,45vmin,560px);   /* diâmetro do botão da Sagasse (≈45% da tela) */
+  --sg-topo:128px;                    /* faixa reservada no topo para o título da home */
+  --sg-b:clamp(58px,11vmin,104px);    /* diâmetro das bolinhas de opção */
+  --sg-disco:radial-gradient(circle at 50% 35%,#6a4d86,#3a2552 70%);
+}
+body.pg-home{height:100svh;overflow:hidden}
+.sem-pre .preloader{display:none}
+
+/* ---------- [SG2] PRELOADER ---------- */
+.preloader{
+  position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding-top:var(--sg-topo);
+  background:radial-gradient(ellipse at 50% 0%,#3f2858 0%,var(--bg) 45%,var(--bg-deep) 100%);
+  transition:opacity .6s,visibility 0s .6s;
+}
+.preloader.fim{opacity:0;visibility:hidden}
+.pre-circulo{
+  position:relative;width:var(--sg-d);height:var(--sg-d);border-radius:50%;overflow:hidden;
+  border:6px solid var(--mint);background:var(--sg-disco);
+  translate:0 70vh;scale:.16;   /* começa pequeno e fora da tela, embaixo */
+  animation:pre-subir .9s var(--ease) forwards, pre-expandir .9s .95s cubic-bezier(.65,0,.35,1) forwards;
+}
+.pre-circulo img,.disco img{position:absolute;left:50%;bottom:9%;height:80%;width:auto;translate:-50% 0;transform-origin:50% 100%}
+.pre-circulo img{opacity:0;animation:aparecer .5s 1.55s forwards}
+@keyframes pre-subir{to{translate:0 0}}
+@keyframes pre-expandir{to{scale:1}}
+@keyframes aparecer{to{opacity:1}}
+
+/* ---------- [SG3] BOTÃO DA SAGASSE ---------- */
+.hub{
+  position:fixed;inset:var(--sg-topo) 0 0 0;display:grid;place-items:center;   /* começa abaixo do título */
+  --rx:min(calc(var(--sg-d)*1.08),calc(50vw - var(--sg-b)/2 - 14px));   /* raio horizontal da órbita */
+  --ry:calc(var(--sg-d)*.8);                                           /* raio vertical da órbita */
+}
+.sagasse-btn{--hover:1.04;position:relative;z-index:2;width:var(--sg-d);height:var(--sg-d);padding:0;border:0;border-radius:50%;background:none;cursor:pointer}
+.respira{position:absolute;inset:0;border-radius:50%;animation:respirar 4s ease-in-out infinite}   /* expande e contrai */
+@keyframes respirar{50%{scale:1.07}}
+.eco{   /* ecos circulares: nascem a cada respiração e somem em 2s */
+  position:absolute;inset:0;border-radius:50%;border:3px solid var(--mint);opacity:0;pointer-events:none;
+  animation:eco 4s ease-out infinite;
+}
+.eco:nth-of-type(2){animation-delay:.45s}
+@keyframes eco{0%{scale:1;opacity:.65}50%{scale:1.75;opacity:0}100%{scale:1.75;opacity:0}}
+.disco{position:absolute;inset:0;border-radius:50%;overflow:hidden;border:6px solid var(--mint);background:var(--sg-disco);box-shadow:0 0 60px rgba(142,209,168,.25)}
+.disco img{transition:opacity .5s,scale .6s var(--ease)}
+.img-acorda{opacity:0;scale:.85}
+.acordada .img-dorme{opacity:0;scale:.85}
+.acordada .img-acorda{opacity:1;scale:1}
+.acordada .respira{animation:none}
+.acordada .eco{animation:none;opacity:0}
+
+/* ---------- [SG4] OPÇÕES QUE FLUTUAM AO REDOR (home) ---------- */
+.orbita{position:absolute;left:50%;top:50%;width:calc(var(--rx)*2);height:calc(var(--ry)*2);translate:-50% -50%;border:1.5px solid rgba(142,209,168,.25);border-radius:50%;pointer-events:none;opacity:0;scale:.6;transition:opacity .6s,scale .8s var(--ease)}
+.acordada .orbita{opacity:1;scale:1}
+.opcoes{list-style:none;position:absolute;inset:0;pointer-events:none}   /* não ocupa espaço no grid: a Sagasse fica no centro da órbita */
+.opt{   /* ponto-âncora no centro; "sai" da Sagasse e vai para a posição da órbita */
+  position:absolute;left:50%;top:50%;width:0;height:0;z-index:1;
+  translate:0 0;scale:.2;opacity:0;pointer-events:none;
+  transition:translate .8s var(--ease) calc(var(--i)*.09s),scale .6s var(--ease) calc(var(--i)*.09s),opacity .4s calc(var(--i)*.09s);
+}
+.acordada .opt{translate:calc(var(--ux)*var(--rx)) calc(var(--uy)*var(--ry));scale:1;opacity:1;pointer-events:auto}
+.opt .flut{position:absolute;left:0;top:0;transform:translate(-50%,calc(var(--sg-b)/-2))}
+.flut{animation:flutuar 4.5s ease-in-out infinite;animation-delay:calc(var(--i)*-.9s)}   /* flutuando */
+@keyframes flutuar{50%{translate:0 -8px}}
+.sg-opt{display:grid;justify-items:center;gap:8px;color:#fff;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:clamp(.72rem,1.6vmin,.95rem);white-space:nowrap}
+.sg-ico{
+  width:var(--sg-b);height:var(--sg-b);border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 35% 30%,#6a4d86,#2e1c42 75%);border:4px solid var(--ring,var(--mint));
+  box-shadow:0 10px 22px rgba(0,0,0,.45),inset 0 -6px 10px rgba(0,0,0,.35);
+}
+.sg-ico svg{width:46%;height:46%;fill:none;stroke:var(--ring,var(--mint));stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- [SG5] TUTORIAL DA SAGASSE ---------- */
+.tutorial{position:fixed;inset:0;z-index:90;display:flex;align-items:flex-end;justify-content:center;padding:24px;background:rgba(14,8,24,.6);backdrop-filter:blur(2px);animation:entrar .4s var(--ease)}
+.tut-card{display:flex;align-items:flex-end;gap:14px;max-width:580px}
+.tut-avatar{flex:none;height:150px;width:auto}
+.tut-fala{position:relative;padding:18px 20px;border-radius:22px 22px 22px 6px;background:var(--mint);color:var(--ink);font-size:1.05rem;font-weight:500;line-height:1.4;margin-bottom:24px}
+.tut-acoes{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-top:14px}
+.tut-pular{padding:8px 12px;border:0;background:none;color:var(--ink);font:500 .95rem 'Rubik',sans-serif;text-decoration:underline;cursor:pointer}
+.tut-prox{padding:9px 20px;border-radius:999px;border:3px solid var(--ink);background:var(--ink);color:var(--mint);font:600 1rem 'Rubik',sans-serif;cursor:pointer}
+
+/* ---------- [SG6] MENU DA SAGASSE NAS PÁGINAS INTERNAS ---------- */
+.sg-menu{position:fixed;top:10px;left:14px;z-index:60}
+.sg-logo{--hover:1.08;display:block;height:clamp(72px,10vw,92px);padding:0;border:0;background:none;cursor:pointer}
+.sg-logo img{height:100%;width:auto;filter:drop-shadow(0 6px 12px rgba(0,0,0,.4))}
+.sg-fundo{position:fixed;inset:0;z-index:55;background:rgba(14,8,24,.4);opacity:0;pointer-events:none;transition:opacity .4s}
+.sg-aberto .sg-fundo{opacity:1;pointer-events:auto}
+.sg-opcoes{--sg-b:54px;position:absolute;top:100%;left:6px;margin-top:16px;list-style:none;display:grid;gap:12px}
+.sg-opcoes li{
+  opacity:0;scale:.3;translate:0 -50px;pointer-events:none;transform-origin:left top;
+  transition:opacity .35s calc(var(--i)*.07s),scale .5s var(--ease) calc(var(--i)*.07s),translate .6s var(--ease) calc(var(--i)*.07s);
+}
+.sg-aberto .sg-opcoes li{opacity:1;scale:1;translate:0 0;pointer-events:auto}
+.sg-opcoes .sg-opt{display:flex;align-items:center;gap:12px}
+.sg-opcoes .sg-opt{--hover:1.06;transform-origin:left center}
+.sg-rotulo{text-transform:none;letter-spacing:0}
+.sg-opcoes .sg-rotulo{padding:6px 14px;border-radius:999px;background:rgba(28,18,44,.88);border:1px solid var(--panel-line);font-size:.95rem}
+
+/* ---------- [SG7] AJUSTES DE ESPAÇO + MOVIMENTO REDUZIDO ---------- */
+/* o logo ocupa o canto superior esquerdo: empurra os cabeçalhos para a direita dele */
+.pg-historias .hist{padding-top:28px}
+.grupo-topo{padding-left:112px}
+.cursos-topo{padding-left:116px}
+@media (max-width:1000px){ .priv{padding-top:112px} .lista-topo{padding-left:112px} }
+@media (max-width:700px){ .cursos-topo{padding:14px 76px 0 112px} .pg-historias .hist{padding-top:112px} }
+@media (prefers-reduced-motion:reduce){ .respira,.eco,.flut{animation:none!important} }
+
+
+/* ---------- [SG8] TÍTULO DO TOPO DA HOME ---------- */
+.titulo-home{   /* caixa fixa no topo; a altura reservada para ela é --sg-topo em [SG1] */
+  position:fixed;top:clamp(12px,2.6vh,24px);left:50%;translate:-50% 0;z-index:3;width:min(92vw,1000px);
+  margin:0;padding:clamp(10px,1.8vh,16px) clamp(16px,3vw,32px);text-align:center;
+  font-size:clamp(1.3rem,3vw,2.2rem);   /* tamanho do texto do título */
+}
+@media (max-width:700px){ :root{--sg-topo:124px} }
+@media (max-height:520px){   /* celular deitado: tudo menor para a órbita caber */
+  :root{--sg-topo:76px;--sg-d:clamp(110px,34vh,300px);--sg-b:clamp(44px,9vh,64px)}
+  .titulo-home{font-size:1.1rem;padding:8px 18px}
+}
